@@ -4,11 +4,11 @@
 #include <unistd.h>
 #define BUFFER_SIZE 256
 namespace server_side {
-    class socket {
+    class mySocket {
     private:
         int socketID;
     public:
-        socket(int id) {
+        mySocket(int id) {
             socketID = id;
         }
         bool writeOut(std::string str) {

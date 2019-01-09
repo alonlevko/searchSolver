@@ -3,4 +3,4 @@ project(searchSolver)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(searchSolver main.cpp socket.h Server.h mySerialServer.cpp mySerialServer.h ClientHandler.h myTestClientHandler.cpp myTestClientHandler.h Solver.h CacheManager.h problem.h solution.h FileCacheManager.cpp FileCacheManager.h)
+add_executable(searchSolver main.cpp mySocket.h Server.h mySerialServer.cpp mySerialServer.h ClientHandler.h myTestClientHandler.cpp myTestClientHandler.h Solver.h CacheManager.h problem.h solution.h FileCacheManager.cpp FileCacheManager.h)

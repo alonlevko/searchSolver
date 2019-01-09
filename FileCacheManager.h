@@ -6,7 +6,6 @@
 #include <fstream>
 class FileCacheManager: public CacheManager {
     std::string fileName = "problemSolutionCache.txt";
-    std::fstream ourFile;
 public:
     FileCacheManager(); // load all problems and solutions
     ~FileCacheManager();// save to the file all of the things

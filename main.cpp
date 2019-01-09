@@ -1,11 +1,9 @@
 #include <iostream>
 #include "FileCacheManager.h"
+#include "mySerialServer.h"
 int main() {
-    FileCacheManager manager;
-    problem p("lish lash4");
-    solution s("ahhh5");
-    problem p1("lish lash6");
-    solution s1("ahhh7");
-    manager.saveSolution(p, s);
-    manager.saveSolution(p1, s1);
-}
+    mySerialServer lash;
+    lash.open(6000, nullptr);
+    lash.close();
+    std::cout << "i got closed";
+};

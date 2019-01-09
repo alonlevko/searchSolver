@@ -4,7 +4,7 @@
 
 #ifndef SEARCHSOLVER_MYTESTCLIENTHANDLER_H
 #define SEARCHSOLVER_MYTESTCLIENTHANDLER_H
-#include "socket.h"
+#include "mySocket.h"
 #include "ClientHandler.h"
 #include "Solver.h"
 using namespace server_side;
@@ -12,7 +12,7 @@ class myTestClientHandler: public ClientHandler {
 private:
     solver* solve;
 public:
-    int handleClient(socket in, socket out) {
+    int handleClient(mySocket in, mySocket out) {
         return 0;
     }
 };

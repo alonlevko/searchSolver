@@ -1,6 +1,5 @@
 #include "FileCacheManager.h"
 FileCacheManager::FileCacheManager() {
-    ourFile.open(fileName, std::ios::out | std::ios::in);
     std::string line;
     std::string problem;
     std::string solution;
@@ -18,27 +17,15 @@ FileCacheManager::FileCacheManager() {
             problem.clear();
             solution.clear();
         }
-    } else {
-        return;
     }
 } // load all problems and solutions
 FileCacheManager::~FileCacheManager() {
-    if(ourFile.is_open()) {
+        std::ofstream out(fileName);
         for (std::map<std::string, std::string>::iterator it = alreadySaved.begin();
              it != alreadySaved.end(); it++) {
-            ourFile << it->first << "$" << it->second << std::endl;
+            out << it->first << "$" << it->second << std::endl;
         }
-        ourFile.close();
-    } else {
-        ourFile.open(fileName, std::fstream::in | std::fstream::out);
-        if(ourFile.is_open()) {
-            for (std::map<std::string, std::string>::iterator it = alreadySaved.begin();
-                 it != alreadySaved.end(); it++) {
-                ourFile << it->first << "$" << it->second << std::endl;
-            }
-        }
-        ourFile.close();
-    }
+        out.close();
 }// save to the file all of the things
 bool FileCacheManager::isSaved(problem p) {
     for(std::map<std::string, std::string>::iterator it = alreadySaved.begin();
