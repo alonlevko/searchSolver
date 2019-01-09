@@ -2,5 +2,6 @@ cmake_minimum_required(VERSION 3.12)
 project(searchSolver)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -pthread")
 
 add_executable(searchSolver main.cpp mySocket.h Server.h mySerialServer.cpp mySerialServer.h ClientHandler.h myTestClientHandler.cpp myTestClientHandler.h Solver.h CacheManager.h problem.h solution.h FileCacheManager.cpp FileCacheManager.h)

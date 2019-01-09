@@ -4,6 +4,7 @@
 int main() {
     mySerialServer lash;
     lash.open(6000, nullptr);
-    lash.close();
+    sleep(30);
+    //lash.close();
     std::cout << "i got closed";
 };

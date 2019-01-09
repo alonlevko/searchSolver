@@ -11,6 +11,26 @@
 #include <iostream>
 #include "mySocket.h"
 
+void doWhatINeed(bool* stop, int* sock,void* cli, socklen_t* clil, ClientHandler* handler1) {
+    struct sockaddr cli1 = *((struct sockaddr*) cli);
+    socklen_t clil1 = *clil;
+    int sock1 = *sock;
+    while(*(stop)) {
+        int newsockfd = accept(sock1, &cli1, &clil1);
+        if(newsockfd < 0) {
+            std::cout << ("ERROR on accept") << std::endl;
+            return;
+        }
+        server_side::mySocket in(newsockfd);
+        in.writeOut("i am your king");
+        server_side::mySocket out(newsockfd);
+        //handler1->handleClient(in, out);
+        ::close(newsockfd);
+        std::cout << " i closed a socket";
+    }
+    ::close(*sock);
+}
+
 int mySerialServer::open(int port, ClientHandler* handler) {
     int sockfd, newsockfd;
     socklen_t clilen;
@@ -35,24 +55,14 @@ int mySerialServer::open(int port, ClientHandler* handler) {
     setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
     listen(sockfd,5);
     clilen = sizeof(cli_addr);
-    this->stopper = true;
-    std::thread run([](bool* stop, int sock, void* cli, sockaddr_in* clil) {
-    while(*(stop)) {
-        int newsockfd = ::accept(sock,(struct sockaddr *) &cli, &clil);
-        if(newsockfd == 0) {
-            continue;
-        }
-        server_side::mySocket in(newsockfd);
-        in.writeOut("i am your king");
-        //server_side::mySocket out(newsockfd);
-        //handler->handleClient(in, out);
-        if (newsockfd < 0)
-            std::cout << ("ERROR on accept") << std::endl;
-        ::close(newsockfd);
-        std::cout << " i closed a socket";
-    }
-    ::close(sock);
-    });
+    stopper = true;
+    bool* a = &stopper;
+    int* b = &sockfd;
+    struct sockaddr_in* c = &cli_addr;
+    socklen_t* d = &clilen;
+    std::thread run(doWhatINeed, a, b, c, d, handler);
+    sleep(1);
+    run.detach();
 }
 int mySerialServer::close() {
     stopper = false;
