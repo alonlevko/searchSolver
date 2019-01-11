@@ -7,13 +7,34 @@
 #include "mySocket.h"
 #include "ClientHandler.h"
 #include "Solver.h"
+#include "StringReverser.h"
+#include "FileCacheManager.h"
 using namespace server_side;
 class myTestClientHandler: public ClientHandler {
 private:
-    solver* solve;
+    FileCacheManager* manager;
+    solver<std::string, std::string>* solve;
 public:
+    myTestClientHandler() {
+        manager = new FileCacheManager();
+        solve = new StringReverser();
+    }
+    ~myTestClientHandler() {
+        delete(manager);
+        delete(solve);
+    }
     int handleClient(mySocket in, mySocket out) {
-        return 0;
+        std::string input;
+        if(in.readIn(&input)) {
+            if(manager->isSaved(input)) {
+                out.writeOut(manager->getSolution(input));
+            } else {
+                std::string s = solve->solve(input);
+                std::cout << s << std::endl;
+                out.writeOut(s);
+                manager->saveSolution(input, s);
+            }
+        }
     }
 };
 

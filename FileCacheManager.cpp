@@ -27,22 +27,22 @@ FileCacheManager::~FileCacheManager() {
         }
         out.close();
 }// save to the file all of the things
-bool FileCacheManager::isSaved(problem p) {
+bool FileCacheManager::isSaved(std::string p) {
     for(std::map<std::string, std::string>::iterator it = alreadySaved.begin();
         it != alreadySaved.end(); it++) {
-        if(it->first.compare(p.represent())) {
+        if(it->first.compare(p) == 0) {
             return true;
         }
     }
     return false;
 }
-solution FileCacheManager::getSolution(problem p) {
+std::string FileCacheManager::getSolution(std::string p) {
     if(isSaved(p)) {
-        return solution(alreadySaved[p.represent()]);
+        return alreadySaved[p];
     } else {
-        return solution("");
+        return "";
     }
 }
-int FileCacheManager::saveSolution(problem p, solution s) {
-    alreadySaved[p.represent()] = s.represent();
+int FileCacheManager::saveSolution(std::string p, std::string s) {
+    alreadySaved[p] = s;
 }

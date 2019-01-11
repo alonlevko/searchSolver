@@ -22,13 +22,13 @@ void doWhatINeed(bool* stop, int* sock,void* cli, socklen_t* clil, ClientHandler
             return;
         }
         server_side::mySocket in(newsockfd);
-        in.writeOut("i am your king");
-        server_side::mySocket out(newsockfd);
-        //handler1->handleClient(in, out);
+        //in.writeOut("i am your king");
+        //server_side::mySocket out(newsockfd);
+        handler1->handleClient(in, in);
         ::close(newsockfd);
-        std::cout << " i closed a socket";
+        //std::cout << " i closed a socket";
     }
-    ::close(*sock);
+    ::close(sock1);
 }
 
 int mySerialServer::open(int port, ClientHandler* handler) {

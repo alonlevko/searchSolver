@@ -9,9 +9,9 @@ class FileCacheManager: public CacheManager {
 public:
     FileCacheManager(); // load all problems and solutions
     ~FileCacheManager();// save to the file all of the things
-    bool isSaved(problem p);
-    solution getSolution(problem p);
-    int saveSolution(problem p, solution s);
+    bool isSaved(std::string p);
+    std::string getSolution(std::string p);
+    int saveSolution(std::string p, std::string s);
 };
 
 

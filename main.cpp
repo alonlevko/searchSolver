@@ -1,10 +1,12 @@
 #include <iostream>
 #include "FileCacheManager.h"
 #include "mySerialServer.h"
+#include "myClientHandler.h"
 int main() {
     mySerialServer lash;
-    lash.open(6000, nullptr);
-    sleep(30);
+    myClientHandler test;
+    lash.open(7416, &test);
+    sleep(600);
     //lash.close();
     std::cout << "i got closed";
 };
