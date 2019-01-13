@@ -10,5 +10,6 @@ public:
     virtual bool isSaved(std::string p) = 0;
     virtual std::string getSolution(std::string p) = 0;
     virtual int saveSolution(std::string p, std::string s) = 0;
+    virtual ~CacheManager(){}
 };
 #endif //SEARCHSOLVER_CACHEMANAGER_H

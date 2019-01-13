@@ -8,5 +8,7 @@ public:
     virtual node* getInitialState() = 0;
     virtual node* getGoalState() = 0;
     virtual std::vector<node*> getSucssesors(node* n) = 0;
+    virtual ~searchable(){}
+    virtual int getNodeNum() = 0;
 };
 #endif //SEARCHSOLVER_SEARCHABLE_H

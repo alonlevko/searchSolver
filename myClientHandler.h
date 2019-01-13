@@ -33,6 +33,8 @@ class myClientHandler: public ClientHandler {
         std::string answer = solver1->solve(str);
         out.writeOut(answer);
         c->saveSolution(str, answer);
+        delete c;
+        delete solver1;
         return 1;
     }
 };

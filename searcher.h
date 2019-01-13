@@ -5,5 +5,6 @@
 class searcher {
 public:
     virtual path search(searchable* searchable1) = 0;
+    virtual ~searcher(){};
 };
 #endif //SEARCHSOLVER_SEARCHER_H

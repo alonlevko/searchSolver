@@ -9,6 +9,7 @@
 #include "searcher.h"
 class BestFirstSearch: public searcher  {
     path search(searchable* searchable1);
+    ~BestFirstSearch(){return;}
 };
 
 

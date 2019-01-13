@@ -23,7 +23,9 @@ public:
     int myWeight() {
         int weight = 0;
         for (std::vector<node*>::iterator iter = nodes.begin(); iter != nodes.end(); iter++ ) {
-            weight += (*(iter))->howHeavy();
+            if(*iter != nullptr) {
+                weight += (*(iter))->howHeavy();
+            }
         }
         return weight;
     }
@@ -32,8 +34,12 @@ public:
         std::string str;
         str+='{';
         str+=((*(nodes[0])).whichNeighbor(nodes[1]));
-        for(int i = 1; i < nodes.size(); i++) {
+        int to = nodes.size() - 1;
+        for(int i = 1; i < to; i++) {
             node* next = nodes[i + 1];
+            if(next == nullptr) {
+                break;
+            }
             str+=',';
             str+=' ';
             str+=nodes[i]->whichNeighbor(next);

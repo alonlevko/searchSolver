@@ -1,13 +1,23 @@
 #include "FileCacheManager.h"
 FileCacheManager::FileCacheManager() {
     std::string line;
+    std::string wholeFile;
     std::string problem;
     std::string solution;
     std::string delimiter = "$";
-    int n;
+    std::string end = "$$";
+    int n, n1;
     std::ifstream in(fileName);
     if(in.is_open()) {
-        while(getline(in, line)) {
+        // read all of the file into wholeFile
+        char c;
+        while ((c = in.get()) != EOF) {
+            wholeFile += c;
+        }
+        while(!wholeFile.empty()) {
+            n1 = wholeFile.find(end);
+            line = wholeFile.substr(0, n1);
+            wholeFile.erase(0, n1 + 2);
             n = line.find(delimiter);
             problem = line.substr(0, n);
             line.erase(0, n + 1);
@@ -23,7 +33,7 @@ FileCacheManager::~FileCacheManager() {
         std::ofstream out(fileName);
         for (std::map<std::string, std::string>::iterator it = alreadySaved.begin();
              it != alreadySaved.end(); it++) {
-            out << it->first << "$" << it->second << std::endl;
+            out << it->first << "$" << it->second << "$$";
         }
         out.close();
 }// save to the file all of the things

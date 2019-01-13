@@ -14,6 +14,7 @@ path BestFirstSearch::search(searchable* searchable1) {
     while(!open.empty()) {
         n = open.top();
         open.pop();
+        inOpen.erase(inOpen.find(n));
         eval.insert(n);
         if(n == searchable1->getGoalState()) {
             node* i = searchable1->getGoalState();
@@ -28,7 +29,6 @@ path BestFirstSearch::search(searchable* searchable1) {
         neighbors = n->neighbors();
         for(std::vector<node*>::iterator it = neighbors.begin(); it != neighbors.end() ; it++) {
             node* s = *it;
-            s->updateSource(n);
             s->updateDistance(n->howFar() + s->howHeavy());
             if(eval.find(s) == eval.end() && inOpen.find(s) == inOpen.end()) {
                 s->updateSource(n);
@@ -36,15 +36,16 @@ path BestFirstSearch::search(searchable* searchable1) {
                 open.push(s);
                 inOpen.insert(s);
             } else {
-                if(*(open.top()) < *(s)) {
-                    if(inOpen.find(s) == eval.end()) {
+                if(*(s) < *(open.top())) {
+                    if(inOpen.find(s) == inOpen.end()) {
+                        //s->updateSource(n);
                         open.push(s);
                         inOpen.insert(s);
                     } else {
-                        s->updateDistance(n->howFar() + s->howHeavy());
+                        //s->updateDistance(n->howFar() + s->howHeavy());
                         node* k = open.top();
-                        node s(k->howHeavy(), k->howFar() + 1);
-                        open.push(&s);
+                        node j(k->howHeavy(), k->howFar() - 1);
+                        open.push(&j);
                         open.pop();
                     }
                 }

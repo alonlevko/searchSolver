@@ -105,6 +105,12 @@ public:
     node* source() {
         return cameFrom;
     }
+    void setHurAirDis(int d) {
+        airDist = d;
+    }
+    int getHurAir() {
+        return airDist;
+    }
 private:
     node* cameFrom = nullptr;
     node* top;
@@ -113,6 +119,7 @@ private:
     node* right;
     int weight;
     int distance;
+    int airDist;
 };
 
 
