@@ -3,17 +3,21 @@
 #include "path.h"
 #include "searchable.h"
 #include <vector>
+template <class T>
 class searcher {
 protected:
-    std::vector<searcher*> copies;
+    //std::vector<searcher<T>*> copies;
 public:
-    virtual path search(searchable* searchable1) = 0;
+    virtual path<T> search(searchable<T>* searchable1) = 0;
     virtual ~searcher() {
-        for(std::vector<searcher*>::iterator it = copies.begin(); it != copies.end(); it++) {
+        /*
+        typedef typename std::vector<searcher<T>*>::iterator temp;
+        for(temp it = copies.begin(); it != copies.end(); it++) {
             delete(*it);
         }
+         */
     }
     virtual int numberOfNodesEvaluated() = 0;
-    virtual searcher* clone() = 0;
+    virtual searcher<T>* clone() = 0;
 };
 #endif //SEARCHSOLVER_SEARCHER_H

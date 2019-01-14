@@ -9,7 +9,7 @@
 class searchSolver: public solver<std::string, std::string> {
 public:
     std::string solve(std::string);
-    searchSolver(searcher* searcher2) {
+    searchSolver(searcher<int>* searcher2) {
         searcher1 = searcher2;
     }
     ~searchSolver() {
@@ -24,6 +24,6 @@ public:
     }
 private:
     std::vector<solver*> vec;
-    searcher* searcher1;
+    searcher<int>* searcher1;
 };
 #endif //SEARCHSOLVER_SEARCHSOLVER_H

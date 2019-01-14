@@ -10,10 +10,10 @@
 int main() {
     myParallelServer lash;
     FileCacheManager man;
-    aStar bfd;
+    BFS<int> bfd;
     searchSolver s(&bfd);
     myClientHandler test(&man, &s);
-    lash.open(6512, &test);
+    lash.open(6513, &test);
     sleep(300);
     lash.close();
     std::cout << "i got closed";

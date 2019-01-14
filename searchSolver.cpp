@@ -58,8 +58,8 @@ std::string searchSolver::solve(std::string str) {
     number.clear();
     std::getline(sstrm3, number, ',');
     end[1] = stoi(number);
-    searchable* searchable1 = new matrixGraph(matrix, start, end);
-    path p = searcher1->search(searchable1);
+    searchable<int>* searchable1 = new matrixGraph<int>(matrix, start, end);
+    path<int> p = searcher1->search(searchable1);
     std::cout << searcher1->numberOfNodesEvaluated() <<std::endl;
     std::string waze = p.pathWaze();
     delete searchable1;
