@@ -8,8 +8,19 @@
 #include "state.h"
 #include "searcher.h"
 class BestFirstSearch: public searcher  {
+public:
+    int numberOfNodesEvaluated() {
+        return nodeNum;
+    }
     path search(searchable* searchable1);
     ~BestFirstSearch(){return;}
+    searcher* clone() {
+        searcher* s = new BestFirstSearch();
+        copies.push_back(s);
+        return s;
+    }
+private:
+    int nodeNum = 0;
 };
 
 

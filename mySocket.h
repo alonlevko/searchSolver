@@ -2,6 +2,8 @@
 #define SEARCHSOLVER_SOCKET_H
 #include <string>
 #include <unistd.h>
+#include <string.h>
+
 #define BUFFER_SIZE 256
 namespace server_side {
     class mySocket {
@@ -17,10 +19,15 @@ namespace server_side {
         }
         bool readIn(std::string* str) {
             char buffer[BUFFER_SIZE];
-            int n = read(socketID, buffer, BUFFER_SIZE);
+            ::bzero(buffer, BUFFER_SIZE);
+            int n = read(socketID, buffer, BUFFER_SIZE - 1);
+            buffer[BUFFER_SIZE - 1] = '\0';
             str->clear();
             str->append(buffer);
             return n > 0;
+        }
+        void close() {
+            ::close(socketID);
         }
     };
 }

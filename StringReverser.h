@@ -9,6 +9,9 @@
 #include <string>
 class StringReverser: public solver<std::string,std::string> {
 public:
+    solver* clone() {
+        return this;
+    }
     std::string solve(std::string str) {
         /*
         std::string reverse;

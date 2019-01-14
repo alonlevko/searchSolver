@@ -12,9 +12,27 @@
 #include "CacheManager.h"
 #include "FileCacheManager.h"
 class myClientHandler: public ClientHandler {
+private:
+    CacheManager* c;
+    solver<std::string, std::string>* solver1;
+    std::vector<myClientHandler*> copies;
+public:
+    myClientHandler(CacheManager* cm, solver<std::string, std::string>* s) {
+        c = cm;
+        solver1 = s;
+    }
+    ClientHandler* clone() {
+        copies.push_back(new myClientHandler(c, solver1->clone()));
+        return copies.back();
+    }
+    ~myClientHandler() {
+        for(std::vector<myClientHandler*>::iterator it = copies.begin(); it != copies.end(); it++) {
+            delete *it;
+        }
+    }
     int handleClient(mySocket in, mySocket out) {
-        CacheManager* c = new FileCacheManager();
-        solver<std::string, std::string>* solver1 = new searchSolver();
+        //CacheManager* c = new FileCacheManager();
+        //solver<std::string, std::string>* solver1 = new searchSolver();
         std::string str;
         std::string temp;
         while(temp.find("end") == std::string::npos) {
@@ -33,8 +51,6 @@ class myClientHandler: public ClientHandler {
         std::string answer = solver1->solve(str);
         out.writeOut(answer);
         c->saveSolution(str, answer);
-        delete c;
-        delete solver1;
         return 1;
     }
 };

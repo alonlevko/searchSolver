@@ -13,10 +13,13 @@ path aStar::search(searchable* searchable1) {
     std::set<node*> inOpen;
     std::set<node*> eval;
     std::vector<node*> negihs;
-    open.push(searchable1->getInitialState());
-    inOpen.insert(searchable1->getInitialState());
+    node* strt = searchable1->getInitialState();
+    strt->updateDistance(0);
+    open.push(strt);
+    inOpen.insert(strt);
     //std::map<node*, int> gscore;
     while(!open.empty()) {
+        numNodes++;
         node* n = open.top();
         inOpen.erase(n);
         open.pop();
@@ -34,10 +37,11 @@ path aStar::search(searchable* searchable1) {
             negihs = n->neighbors();
             for(std::vector<node*>::iterator it = negihs.begin(); it!=negihs.end(); it++) {
                 node*s = *it;
+                s->updateDistance(n->howFar() + s->howHeavy());
                 if(eval.find(s) != eval.end()) {
                     continue;
                 } else {
-                    int tentative = s->howFar() + s->howHeavy();
+                    int tentative = n->howFar() + s->howHeavy();
                     if(inOpen.find(s) == inOpen.end()) {
                         open.push(s);
                         inOpen.insert(s);

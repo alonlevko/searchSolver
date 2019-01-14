@@ -13,7 +13,7 @@ matrixGraph::matrixGraph(std::vector<std::vector<int>>& matrix, int (&s)[2], int
     for(int i = 0; i < matrix.size(); ++i) {
         matrixNodes[i].resize(matrix[i].size());
         for(int j = 0; j < matrix[i].size(); ++j) {
-            matrixNodes[i][j] = new node(matrix[i][j], 0);
+            matrixNodes[i][j] = new node(matrix[i][j], -1);
         }
     }
     for(int i = 0; i < matrix.size(); ++i) {

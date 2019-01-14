@@ -9,7 +9,9 @@ path BFS::search(searchable* searchable1) {
     std::set<node*> eval;
     std::vector<node*> negibors;
     open.push(searchable1->getInitialState());
+    eval.insert(searchable1->getInitialState());
     while(!open.empty()) {
+        nodeNum++;
         node* n = open.front();
         open.pop();
         if(n==searchable1->getGoalState()) {
@@ -29,10 +31,11 @@ path BFS::search(searchable* searchable1) {
                     continue;
                 } else {
                     s->updateSource(n);
+                    eval.insert(s);
                     open.push(s);
                 }
             }
-            eval.insert(n);
+            //eval.insert(n);
         }
     }
 }

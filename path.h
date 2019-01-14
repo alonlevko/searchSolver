@@ -8,21 +8,24 @@
 #include <vector>
 #include <list>
 #include "state.h"
+template <class T>
 class path {
 private:
-    std::vector<node*> nodes;
+    std::vector<node<T>*> nodes;
 public:
-    path(std::vector<node*> ns) {
+    path(std::vector<node<T>*> ns) {
         nodes = ns;
     }
-    path(std::list<node*> ns) {
-        for(std::list<node*>::iterator it = ns.begin(); it != ns.end(); ++it) {
+    path(std::list<node<T>*> ns) {
+        typedef typename std::list<node<T>*>::iterator a;
+        for(a it = ns.begin(); it != ns.end(); ++it) {
             nodes.push_back(*it);
         }
     }
     int myWeight() {
         int weight = 0;
-        for (std::vector<node*>::iterator iter = nodes.begin(); iter != nodes.end(); iter++ ) {
+        typedef typename std::vector<node<T>*>::iterator b;
+        for (b iter = nodes.begin(); iter != nodes.end(); iter++ ) {
             if(*iter != nullptr) {
                 weight += (*(iter))->howHeavy();
             }
@@ -36,7 +39,7 @@ public:
         str+=((*(nodes[0])).whichNeighbor(nodes[1]));
         int to = nodes.size() - 1;
         for(int i = 1; i < to; i++) {
-            node* next = nodes[i + 1];
+            node<T>* next = nodes[i + 1];
             if(next == nullptr) {
                 break;
             }

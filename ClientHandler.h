@@ -8,6 +8,9 @@
 #include "mySocket.h"
 using namespace server_side;
 class ClientHandler {
-public: virtual int handleClient(mySocket in, mySocket out) = 0;
+public:
+    virtual ClientHandler* clone() = 0;
+    virtual int handleClient(mySocket in, mySocket out) = 0;
+    ~ClientHandler(){};
 };
 #endif //SEARCHSOLVER_CLIENTHANDLER_H

@@ -22,16 +22,14 @@ std::string searchSolver::solve(std::string str) {
     int rowsRead = 0;
     bool c = true;
     while(std::getline(sstrm, line)) {
-        if(numbersInRow != 0 && rowsRead != 0 && numbersInRow == rowsRead) {
+        if(numbersInRow != 0 && line.size() == 3) {
             break;
         }
         if(str.find_first_not_of(' ') == std::string::npos) {
             break;
         }
         std::istringstream sstrm2(line);
-        std::cout << line << std::endl;
         while(std::getline(sstrm2, number, ',')) {
-                std::cout << number << std::endl;
                 if(c) {
                     numbersInRow++;
                 }
@@ -61,11 +59,10 @@ std::string searchSolver::solve(std::string str) {
     std::getline(sstrm3, number, ',');
     end[1] = stoi(number);
     searchable* searchable1 = new matrixGraph(matrix, start, end);
-    searcher* searcher1 = new aStar();
     path p = searcher1->search(searchable1);
+    std::cout << searcher1->numberOfNodesEvaluated() <<std::endl;
     std::string waze = p.pathWaze();
     delete searchable1;
-    delete searcher1;
     return waze;
 }
 

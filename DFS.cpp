@@ -25,6 +25,7 @@ path DFS::search(searchable* searchable1) {
 
 void DFS::findPathUtil(std::list<path>& pathes, std::set<node*>& eval, node* source, node* end,
         std::vector<node*>& routh, int& routhIndex) {
+        nodeNum++;
         eval.insert(source);
         std::vector<node*> neigh = source->neighbors();
         routh[routhIndex] = source;
@@ -32,6 +33,7 @@ void DFS::findPathUtil(std::list<path>& pathes, std::set<node*>& eval, node* sou
         if(source == end) {
             path p(routh);
             pathes.push_back(p);
+            return;
         } else {
             for(std::vector<node*>::iterator it = neigh.begin(); it!=neigh.end(); it++) {
                 node* n = *it;
@@ -40,6 +42,6 @@ void DFS::findPathUtil(std::list<path>& pathes, std::set<node*>& eval, node* sou
                 }
             }
         }
-        routhIndex--;
-        eval.erase(source);
+        //routhIndex--;
+        //eval.erase(source);
 }

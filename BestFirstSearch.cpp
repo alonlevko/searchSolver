@@ -12,6 +12,7 @@ path BestFirstSearch::search(searchable* searchable1) {
     n->updateDistance(0);
     open.push(n);
     while(!open.empty()) {
+        nodeNum++;
         n = open.top();
         open.pop();
         inOpen.erase(inOpen.find(n));
@@ -44,9 +45,8 @@ path BestFirstSearch::search(searchable* searchable1) {
                     } else {
                         //s->updateDistance(n->howFar() + s->howHeavy());
                         node* k = open.top();
-                        node j(k->howHeavy(), k->howFar() - 1);
-                        open.push(&j);
                         open.pop();
+                        open.push(k);
                     }
                 }
             }

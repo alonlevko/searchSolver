@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+template <class T>
 class node {
 public:
     bool operator <(const node& other) {
@@ -43,7 +44,7 @@ public:
     int howHeavy(){
         return weight;
     }
-    node(int w, int d, node* t, node* d2, node* l, node* r) {
+    node(T w, T d, node* t, node* d2, node* l, node* r) {
         weight = w;
         distance = d;
         top = t;
@@ -51,7 +52,7 @@ public:
         left = l;
         right = r;
     }
-    node(int w, int d) {
+    node(T w, T d) {
         weight = w;
         distance = d;
         top = nullptr;
@@ -105,7 +106,7 @@ public:
     node* source() {
         return cameFrom;
     }
-    void setHurAirDis(int d) {
+    void setHurAirDis(T d) {
         airDist = d;
     }
     int getHurAir() {
@@ -117,9 +118,9 @@ private:
     node* down;
     node* left;
     node* right;
-    int weight;
-    int distance;
-    int airDist;
+    T weight;
+    T distance;
+    T airDist;
 };
 
 
