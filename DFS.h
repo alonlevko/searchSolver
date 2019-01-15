@@ -4,7 +4,7 @@
 #include "searcher.h"
 #include <list>
 #include <set>
-template <class T, class S>
+template <class T>
 class DFS : public searcher<T> {
 public:
     path<T> search(searchable<T>* searchable1) {

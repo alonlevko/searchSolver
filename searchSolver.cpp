@@ -60,7 +60,8 @@ std::string searchSolver::solve(std::string str) {
     end[1] = stoi(number);
     searchable<int>* searchable1 = new matrixGraph<int>(matrix, start, end);
     path<int> p = searcher1->search(searchable1);
-    std::cout << searcher1->numberOfNodesEvaluated() <<std::endl;
+    std::cout << "nodes evaluated: " << searcher1->numberOfNodesEvaluated() <<std::endl;
+    std::cout << "path weight: " << p.myWeight() << std::endl;
     std::string waze = p.pathWaze();
     delete searchable1;
     return waze;

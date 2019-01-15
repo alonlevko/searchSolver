@@ -2,12 +2,12 @@
 #define SEARCHSOLVER_CACHEMANAGER_H
 #include "solution.h"
 #include "problem.h"
-#include <map>
+#include <unordered_map>
 #include <vector>
 class CacheManager {
 private:
 protected:
-    std::map<std::string, std::string> alreadySaved;
+    std::unordered_map<std::string, std::string> alreadySaved;
 public:
     virtual bool isSaved(std::string p) = 0;
     virtual std::string getSolution(std::string p) = 0;

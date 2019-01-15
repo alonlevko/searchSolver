@@ -31,14 +31,14 @@ FileCacheManager::FileCacheManager() {
 } // load all problems and solutions
 FileCacheManager::~FileCacheManager() {
         std::ofstream out(fileName);
-        for (std::map<std::string, std::string>::iterator it = alreadySaved.begin();
+        for (std::unordered_map<std::string, std::string>::iterator it = alreadySaved.begin();
              it != alreadySaved.end(); it++) {
             out << it->first << "$" << it->second << "$$";
         }
         out.close();
 }// save to the file all of the things
 bool FileCacheManager::isSaved(std::string p) {
-    for(std::map<std::string, std::string>::iterator it = alreadySaved.begin();
+    for(std::unordered_map<std::string, std::string>::iterator it = alreadySaved.begin();
         it != alreadySaved.end(); it++) {
         if(it->first.compare(p) == 0) {
             return true;
