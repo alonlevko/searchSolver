@@ -64,7 +64,7 @@ int mySerialServer::open(int port, ClientHandler* handler) {
     socklen_t* d = &clilen;
     std::thread run(doWhatINeed, a, b, c, d, handler);
     sleep(1);
-    run.detach();
+    run.join();
 }
 int mySerialServer::close() {
     stopper = false;

@@ -7,14 +7,17 @@
 #include "DFS.h"
 #include "aStar.h"
 #include "BestFirstSearch.h"
-int main() {
-    myParallelServer lash;
-    FileCacheManager man;
-    BestFirstSearch<int> bfd;
-    searchSolver s(&bfd);
-    myClientHandler test(&man, &s);
-    lash.open(6522, &test);
-    sleep(30);
-    lash.close();
-    std::cout << "i got closed";
-};
+namespace boot {
+    class Main {
+        int main(int argc, char **argv) {
+            myParallelServer serv;
+            FileCacheManager man;
+            aStar<int> sear;
+            searchSolver s(&sear);
+            myClientHandler test(&man, &s);
+            int port = atoi(argv[1]);
+            serv.open(port, &test);
+            serv.close();
+        };
+    }
+}
